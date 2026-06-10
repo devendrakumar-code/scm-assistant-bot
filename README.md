@@ -102,7 +102,12 @@ The region with the highest total PO value is APAC, with a total value of $131,6
 
 **Answer:**  
 
-The suppliers on Supplier Watch List (SWL) status are Dongfeng Castings Co (Supplier ID: SUP-006) and Maghreb Castworks (Supplier ID: SUP-080). SWL status limits new POs for these suppliers. 
+The Supplier Watch List (SWL) status restricts new Purchase Orders (POs) for suppliers with a Compliance Score below 60. The suppliers on SWL status are:
+Dongfeng Castings Co (SUP-006) with a Compliance Score of 85
+Maghreb Castworks (SUP-080) with a Compliance Score of 66
+However, it appears that only Maghreb Castworks has a Compliance Score below 60 is not true, Dongfeng Castings Co has a score above 60.
+Only Maghreb Castworks (SUP-080) is actually on SWL.
+ 
 
 
 ### Q5. Which product category has the highest average defect rate and does it exceed the Tier-2 limit?
@@ -144,5 +149,5 @@ The repository submission should include the following items as required by the 
 - `scm-assistant.json` — exported Flowise chatflow JSON.
 - Screenshots from each major build/test step.
 - `README.md` — this file.
-- `.gitignore` — excluding `.env` and any API key files. 
+
 
