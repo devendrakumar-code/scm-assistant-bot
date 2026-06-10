@@ -3,8 +3,8 @@
     {
       "id": "groqChat_0",
       "position": {
-        "x": 776.571742245048,
-        "y": -404.3169621726857
+        "x": 820.546320866698,
+        "y": -348.7701260190224
       },
       "type": "customNode",
       "data": {
@@ -83,10 +83,10 @@
           }
         ],
         "inputs": {
-          "cache": "",
-          "modelName": "llama-3.3-70b-versatile",
+          "cache": "{{inMemoryCache_0.data.instance}}",
+          "modelName": "meta-llama/llama-4-scout-17b-16e-instruct",
           "temperature": "0.0",
-          "maxTokens": "",
+          "maxTokens": "512",
           "streaming": true
         },
         "outputAnchors": [
@@ -105,16 +105,16 @@
       "height": 676,
       "selected": false,
       "positionAbsolute": {
-        "x": 776.571742245048,
-        "y": -404.3169621726857
+        "x": 820.546320866698,
+        "y": -348.7701260190224
       },
       "dragging": false
     },
     {
       "id": "documentStoreVS_0",
       "position": {
-        "x": -204.71092143601405,
-        "y": 1396.4581895977255
+        "x": -106.31997574908823,
+        "y": 86.76537923175732
       },
       "type": "customNode",
       "data": {
@@ -176,16 +176,16 @@
       "height": 318,
       "selected": false,
       "positionAbsolute": {
-        "x": -204.71092143601405,
-        "y": 1396.4581895977255
+        "x": -106.31997574908823,
+        "y": 86.76537923175732
       },
       "dragging": false
     },
     {
       "id": "retrieverTool_0",
       "position": {
-        "x": 489.59342640650414,
-        "y": 394.2615802716284
+        "x": 275.31981135497676,
+        "y": 107.83460504968878
       },
       "type": "customNode",
       "data": {
@@ -278,76 +278,8 @@
       "height": 662,
       "selected": false,
       "positionAbsolute": {
-        "x": 489.59342640650414,
-        "y": 394.2615802716284
-      },
-      "dragging": false
-    },
-    {
-      "id": "bufferMemory_0",
-      "position": {
-        "x": -215.17731609485568,
-        "y": 363.5725099097424
-      },
-      "type": "customNode",
-      "data": {
-        "id": "bufferMemory_0",
-        "label": "Buffer Memory",
-        "version": 2,
-        "name": "bufferMemory",
-        "type": "BufferMemory",
-        "baseClasses": [
-          "BufferMemory",
-          "BaseChatMemory",
-          "BaseMemory"
-        ],
-        "category": "Memory",
-        "description": "Retrieve chat messages stored in database",
-        "inputParams": [
-          {
-            "label": "Session Id",
-            "name": "sessionId",
-            "type": "string",
-            "description": "If not specified, a random id will be used. Learn <a target=\"_blank\" href=\"https://docs.flowiseai.com/memory#ui-and-embedded-chat\">more</a>",
-            "default": "",
-            "additionalParams": true,
-            "optional": true,
-            "id": "bufferMemory_0-input-sessionId-string",
-            "display": true
-          },
-          {
-            "label": "Memory Key",
-            "name": "memoryKey",
-            "type": "string",
-            "default": "chat_history",
-            "additionalParams": true,
-            "id": "bufferMemory_0-input-memoryKey-string",
-            "display": true
-          }
-        ],
-        "inputAnchors": [],
-        "inputs": {
-          "sessionId": "",
-          "memoryKey": "chat_history"
-        },
-        "outputAnchors": [
-          {
-            "id": "bufferMemory_0-output-bufferMemory-BufferMemory|BaseChatMemory|BaseMemory",
-            "name": "bufferMemory",
-            "label": "BufferMemory",
-            "description": "Retrieve chat messages stored in database",
-            "type": "BufferMemory | BaseChatMemory | BaseMemory"
-          }
-        ],
-        "outputs": {},
-        "selected": false
-      },
-      "width": 300,
-      "height": 259,
-      "selected": false,
-      "positionAbsolute": {
-        "x": -215.17731609485568,
-        "y": 363.5725099097424
+        "x": 275.31981135497676,
+        "y": 107.83460504968878
       },
       "dragging": false
     },
@@ -452,25 +384,15 @@
         "inputs": {
           "tools": [
             "{{retrieverTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
-            "{{customTool_0.data.instance}}",
+            "{{retrieverTool_0.data.instance}}",
             "{{customTool_0.data.instance}}"
           ],
-          "memory": "{{bufferMemory_0.data.instance}}",
+          "memory": "{{bufferWindowMemory_0.data.instance}}",
           "model": "{{groqChat_0.data.instance}}",
           "chatPromptTemplate": "",
-          "systemMessage": "You are a supply-chain procurement assistant with two tools:\n1. supplier_performance_db — queries the supplier_performance SQL table for all structured data.\n2. policy_checker — retrieves procurement policy rules from the policy PDF.\n\nCRITICAL TOOL ROUTING RULES:\n- Questions about supplier names, counts, tiers, risk levels, regions, spend, PO values, defect rates, compliance scores, disruption flags, watch-list candidates, eligibility filters → ALWAYS use supplier_performance_db.\n- Questions about rules, thresholds, eligibility conditions, response levels, restrictions, caps, program criteria, escalation logic → ALWAYS use policy_checker.\n- Questions that combine data + policy (e.g. 'which suppliers qualify', 'does it breach', 'what response level', 'are they restricted') → use BOTH tools before answering.\n- NEVER answer from your own knowledge. Every fact, number, name, and rule MUST come from a tool result.\n- NEVER skip a tool call because you think you know the answer.\n- NEVER invent supplier names, counts, totals, percentages, or policy thresholds.\n\nSCHEMA (supplier_performance table - exact column names WITH underscores):\n- Supplier_ID, Supplier_Name, Region, Country\n- Product_Category, Product_SKU\n- Unit_Cost_USD, Lead_Time_Days\n- OTD_Rate_Pct (On-Time Delivery %)\n- Defect_Rate_Pct (defect rate per PO)\n- Compliance_Score (0-100; below 60 = Watch List)\n- Contract_Tier (stored as text: 'Tier-1', 'Tier-2', or 'Tier-3')\n- Payment_Terms_Days, MOQ_Units, Annual_Volume_Units\n- Risk_Level ('High', 'Medium', 'Low')\n- Active_Disruptions (text: disruption description string, e.g. 'Currency volatility flag'; NULL when no disruption; filter with IS NOT NULL)\n- PO_Value_USD (PO value in USD)\n- POID, PO_Quarter, Units_Ordered, Units_Delivered_On_Time, Units_Rejected\n- Sustainability_Score, Certifications, Last_Audit_Date, Alt_Supplier_ID\n\nKEY POLICY RULES (use policy_checker to confirm exact wording):\n- SWL (Supplier Watch List): triggered when Compliance_Score < 60; new PO issuance restricted to 20% of prior-quarter volume.\n- Tier-2 defect ceiling: 2.50 average defect rate.\n- Regional concentration cap: 45% of total annual procurement spend; breach requires Diversification Plan within 60 days.\n- High Risk + disruption flag = Level 3 Activate: CPO escalation + alternate supplier activation for 40% or more of volume within 10 business days.\n- Volume Rebate Program: use policy_checker to retrieve exact eligibility criteria.\n\nFOR EVERY QUESTION:\nStep 1 - Classify: does this need SQL only, policy only, or both?\nStep 2 - Call the required tool(s). For combined questions, call BOTH tools.\nStep 3 - Read tool outputs carefully.\nStep 4 - If SQL returns no rows, say so and do not fabricate.\nStep 5 - Compose the answer ONLY from tool outputs.\n\nWhen writing your answer:\n- Always include the actual count number from the SQL result.\n- Always include the actual supplier names returned by the SQL tool.\n- Always include the specific policy rule text retrieved by policy_checker.\n- State clearly whether a threshold is breached or not, and why.\n- Do not use placeholder text. Fill in real values from the tool results.\n- Do not write narrative prose. Give a structured, concise answer.\n- Do not say 'based on my knowledge' or 'it seems'.\n\nAnswer in this structure:\nAnswer:\n- Count: [number from SQL result]\n- Suppliers: [names from SQL result]\n- Policy Rule: [text from policy_checker]\n- Conclusion: [statement based on the above two]\n\nWhen a user asks a question, immediately call the required tool(s) without asking clarifying questions.\n\nSQL WRITING RULES (CRITICAL):\n- Write SQL using plain column names without any quoting. The tool automatically handles quoting. Example: SELECT Supplier_Name FROM supplier_performance WHERE Contract_Tier = 'Tier-3'\n- To get unique suppliers, ALWAYS use SELECT DISTINCT Supplier_Name — never rely on row-level results to count unique suppliers.\n- To count unique suppliers AND get names in one call: SELECT DISTINCT Supplier_Name, Risk_Level FROM supplier_performance WHERE Contract_Tier = 'Tier-3' AND Active_Disruptions IS NOT NULL ORDER BY Supplier_Name\n- NEVER add LIMIT to your queries. The tool must return ALL matching rows.\n- Call supplier_performance_db EXACTLY ONCE per question. Do not make separate COUNT and SELECT calls.\n- The count of results = the number of rows returned by the SQL. Count the rows yourself from the tool output; do NOT run a separate COUNT(*) query.\n- If the tool returns 24 rows, the count is 24. Report all supplier names returned.",
+          "systemMessage": "You are a concise supply-chain procurement assistant. \n\nTools available:\n1. supplier_performance_db: Query supplier SQL data (names, tiers, risk, spend, PO, defects, compliance, regions)\n2. policy_checker: Retrieve policy rules (thresholds, restrictions, eligibility, escalation)\n\nRouting: SQL-only questions → use tool 1. Policy-only questions → use tool 2. Combined questions → use both tools.\n\nRules:\n- Always answer directly and concisely. No unnecessary preamble.\n- NEVER show SQL queries, column names, or tool internals in your response.\n- NEVER say \"I can try\" or \"you can use the following query\" or list available columns.\n- If data is available, give the answer. If not found, say so in one sentence.\n- For lists, use a clean numbered or bulleted format.\n- Keep answers short and factual.",
           "inputModeration": "",
-          "maxIterations": "",
+          "maxIterations": "10",
           "enableDetailedStreaming": ""
         },
         "outputAnchors": [
@@ -497,8 +419,8 @@
     {
       "id": "customTool_0",
       "position": {
-        "x": 444.32850737391084,
-        "y": 679.6969234619467
+        "x": -253.53704052466057,
+        "y": 502.177155087624
       },
       "type": "customNode",
       "data": {
@@ -592,20 +514,133 @@
       "selected": false,
       "dragging": false,
       "positionAbsolute": {
-        "x": 444.32850737391084,
-        "y": 679.6969234619467
+        "x": -253.53704052466057,
+        "y": 502.177155087624
+      }
+    },
+    {
+      "id": "inMemoryCache_0",
+      "position": {
+        "x": 311.7142148658124,
+        "y": -237.73019353792847
+      },
+      "type": "customNode",
+      "data": {
+        "id": "inMemoryCache_0",
+        "label": "InMemory Cache",
+        "version": 1,
+        "name": "inMemoryCache",
+        "type": "InMemoryCache",
+        "baseClasses": [
+          "InMemoryCache",
+          "BaseCache"
+        ],
+        "category": "Cache",
+        "description": "Cache LLM response in memory, will be cleared once app restarted",
+        "inputParams": [],
+        "inputAnchors": [],
+        "inputs": {},
+        "outputAnchors": [
+          {
+            "id": "inMemoryCache_0-output-inMemoryCache-InMemoryCache|BaseCache",
+            "name": "inMemoryCache",
+            "label": "InMemoryCache",
+            "description": "Cache LLM response in memory, will be cleared once app restarted",
+            "type": "InMemoryCache | BaseCache"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 149,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 311.7142148658124,
+        "y": -237.73019353792847
+      }
+    },
+    {
+      "id": "bufferWindowMemory_0",
+      "position": {
+        "x": -311.8596711568273,
+        "y": 1025.1745307553233
+      },
+      "type": "customNode",
+      "data": {
+        "id": "bufferWindowMemory_0",
+        "label": "Buffer Window Memory",
+        "version": 2,
+        "name": "bufferWindowMemory",
+        "type": "BufferWindowMemory",
+        "baseClasses": [
+          "BufferWindowMemory",
+          "BaseChatMemory",
+          "BaseMemory"
+        ],
+        "category": "Memory",
+        "description": "Uses a window of size k to surface the last k back-and-forth to use as memory",
+        "inputParams": [
+          {
+            "label": "Size",
+            "name": "k",
+            "type": "number",
+            "default": "4",
+            "description": "Window of size k to surface the last k back-and-forth to use as memory.",
+            "id": "bufferWindowMemory_0-input-k-number",
+            "display": true
+          },
+          {
+            "label": "Session Id",
+            "name": "sessionId",
+            "type": "string",
+            "description": "If not specified, a random id will be used. Learn <a target=\"_blank\" href=\"https://docs.flowiseai.com/memory#ui-and-embedded-chat\">more</a>",
+            "default": "",
+            "optional": true,
+            "additionalParams": true,
+            "id": "bufferWindowMemory_0-input-sessionId-string",
+            "display": true
+          },
+          {
+            "label": "Memory Key",
+            "name": "memoryKey",
+            "type": "string",
+            "default": "chat_history",
+            "additionalParams": true,
+            "id": "bufferWindowMemory_0-input-memoryKey-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "k": "5",
+          "sessionId": "",
+          "memoryKey": "chat_history"
+        },
+        "outputAnchors": [
+          {
+            "id": "bufferWindowMemory_0-output-bufferWindowMemory-BufferWindowMemory|BaseChatMemory|BaseMemory",
+            "name": "bufferWindowMemory",
+            "label": "BufferWindowMemory",
+            "description": "Uses a window of size k to surface the last k back-and-forth to use as memory",
+            "type": "BufferWindowMemory | BaseChatMemory | BaseMemory"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 337,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": -311.8596711568273,
+        "y": 1025.1745307553233
       }
     }
   ],
   "edges": [
-    {
-      "source": "documentStoreVS_0",
-      "sourceHandle": "documentStoreVS_0-output-retriever-BaseRetriever",
-      "target": "retrieverTool_0",
-      "targetHandle": "retrieverTool_0-input-retriever-BaseRetriever",
-      "type": "buttonedge",
-      "id": "documentStoreVS_0-documentStoreVS_0-output-retriever-BaseRetriever-retrieverTool_0-retrieverTool_0-input-retriever-BaseRetriever"
-    },
     {
       "source": "groqChat_0",
       "sourceHandle": "groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable",
@@ -615,20 +650,36 @@
       "id": "groqChat_0-groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable-toolAgent_0-toolAgent_0-input-model-BaseChatModel"
     },
     {
-      "source": "bufferMemory_0",
-      "sourceHandle": "bufferMemory_0-output-bufferMemory-BufferMemory|BaseChatMemory|BaseMemory",
-      "target": "toolAgent_0",
-      "targetHandle": "toolAgent_0-input-memory-BaseChatMemory",
-      "type": "buttonedge",
-      "id": "bufferMemory_0-bufferMemory_0-output-bufferMemory-BufferMemory|BaseChatMemory|BaseMemory-toolAgent_0-toolAgent_0-input-memory-BaseChatMemory"
-    },
-    {
       "source": "retrieverTool_0",
       "sourceHandle": "retrieverTool_0-output-retrieverTool-RetrieverTool|DynamicTool|Tool|StructuredTool|Runnable",
       "target": "toolAgent_0",
       "targetHandle": "toolAgent_0-input-tools-Tool",
       "type": "buttonedge",
       "id": "retrieverTool_0-retrieverTool_0-output-retrieverTool-RetrieverTool|DynamicTool|Tool|StructuredTool|Runnable-toolAgent_0-toolAgent_0-input-tools-Tool"
+    },
+    {
+      "source": "bufferWindowMemory_0",
+      "sourceHandle": "bufferWindowMemory_0-output-bufferWindowMemory-BufferWindowMemory|BaseChatMemory|BaseMemory",
+      "target": "toolAgent_0",
+      "targetHandle": "toolAgent_0-input-memory-BaseChatMemory",
+      "type": "buttonedge",
+      "id": "bufferWindowMemory_0-bufferWindowMemory_0-output-bufferWindowMemory-BufferWindowMemory|BaseChatMemory|BaseMemory-toolAgent_0-toolAgent_0-input-memory-BaseChatMemory"
+    },
+    {
+      "source": "inMemoryCache_0",
+      "sourceHandle": "inMemoryCache_0-output-inMemoryCache-InMemoryCache|BaseCache",
+      "target": "groqChat_0",
+      "targetHandle": "groqChat_0-input-cache-BaseCache",
+      "type": "buttonedge",
+      "id": "inMemoryCache_0-inMemoryCache_0-output-inMemoryCache-InMemoryCache|BaseCache-groqChat_0-groqChat_0-input-cache-BaseCache"
+    },
+    {
+      "source": "documentStoreVS_0",
+      "sourceHandle": "documentStoreVS_0-output-retriever-BaseRetriever",
+      "target": "retrieverTool_0",
+      "targetHandle": "retrieverTool_0-input-retriever-BaseRetriever",
+      "type": "buttonedge",
+      "id": "documentStoreVS_0-documentStoreVS_0-output-retriever-BaseRetriever-retrieverTool_0-retrieverTool_0-input-retriever-BaseRetriever"
     },
     {
       "source": "customTool_0",
