@@ -1,0 +1,642 @@
+{
+  "nodes": [
+    {
+      "id": "groqChat_0",
+      "position": {
+        "x": 776.571742245048,
+        "y": -404.3169621726857
+      },
+      "type": "customNode",
+      "data": {
+        "id": "groqChat_0",
+        "label": "Groq",
+        "version": 4,
+        "name": "groqChat",
+        "type": "GroqChat",
+        "baseClasses": [
+          "GroqChat",
+          "BaseChatModel",
+          "BaseLanguageModel",
+          "Runnable"
+        ],
+        "category": "Chat Models",
+        "description": "Wrapper around Groq API with LPU Inference Engine",
+        "inputParams": [
+          {
+            "label": "Connect Credential",
+            "name": "credential",
+            "type": "credential",
+            "credentialNames": [
+              "groqApi"
+            ],
+            "optional": true,
+            "id": "groqChat_0-input-credential-credential",
+            "display": true
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "asyncOptions",
+            "loadMethod": "listModels",
+            "placeholder": "llama3-70b-8192",
+            "id": "groqChat_0-input-modelName-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Temperature",
+            "name": "temperature",
+            "type": "number",
+            "step": 0.1,
+            "default": 0.9,
+            "optional": true,
+            "id": "groqChat_0-input-temperature-number",
+            "display": true
+          },
+          {
+            "label": "Max Tokens",
+            "name": "maxTokens",
+            "type": "number",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "groqChat_0-input-maxTokens-number",
+            "display": true
+          },
+          {
+            "label": "Streaming",
+            "name": "streaming",
+            "type": "boolean",
+            "default": true,
+            "optional": true,
+            "id": "groqChat_0-input-streaming-boolean",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Cache",
+            "name": "cache",
+            "type": "BaseCache",
+            "optional": true,
+            "id": "groqChat_0-input-cache-BaseCache",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "cache": "",
+          "modelName": "llama-3.3-70b-versatile",
+          "temperature": "0.0",
+          "maxTokens": "",
+          "streaming": true
+        },
+        "outputAnchors": [
+          {
+            "id": "groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable",
+            "name": "groqChat",
+            "label": "GroqChat",
+            "description": "Wrapper around Groq API with LPU Inference Engine",
+            "type": "GroqChat | BaseChatModel | BaseLanguageModel | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 676,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 776.571742245048,
+        "y": -404.3169621726857
+      },
+      "dragging": false
+    },
+    {
+      "id": "documentStoreVS_0",
+      "position": {
+        "x": -204.71092143601405,
+        "y": 1396.4581895977255
+      },
+      "type": "customNode",
+      "data": {
+        "id": "documentStoreVS_0",
+        "label": "Document Store (Vector)",
+        "version": 1,
+        "name": "documentStoreVS",
+        "type": "DocumentStoreVS",
+        "baseClasses": [
+          "DocumentStoreVS"
+        ],
+        "category": "Vector Stores",
+        "description": "Search and retrieve documents from Document Store",
+        "inputParams": [
+          {
+            "label": "Select Store",
+            "name": "selectedStore",
+            "type": "asyncOptions",
+            "loadMethod": "listStores",
+            "id": "documentStoreVS_0-input-selectedStore-asyncOptions",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "selectedStore": "013c148e-3020-4e95-8cfd-e186b835ff45"
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "",
+            "options": [
+              {
+                "id": "documentStoreVS_0-output-retriever-BaseRetriever",
+                "name": "retriever",
+                "label": "Retriever",
+                "description": "",
+                "type": "BaseRetriever"
+              },
+              {
+                "id": "documentStoreVS_0-output-vectorStore-VectorStore",
+                "name": "vectorStore",
+                "label": "Vector Store",
+                "description": "",
+                "type": "VectorStore"
+              }
+            ],
+            "default": "retriever"
+          }
+        ],
+        "outputs": {
+          "output": "retriever"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 318,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -204.71092143601405,
+        "y": 1396.4581895977255
+      },
+      "dragging": false
+    },
+    {
+      "id": "retrieverTool_0",
+      "position": {
+        "x": 489.59342640650414,
+        "y": 394.2615802716284
+      },
+      "type": "customNode",
+      "data": {
+        "id": "retrieverTool_0",
+        "label": "Retriever Tool",
+        "version": 3,
+        "name": "retrieverTool",
+        "type": "RetrieverTool",
+        "baseClasses": [
+          "RetrieverTool",
+          "DynamicTool",
+          "Tool",
+          "StructuredTool",
+          "Runnable"
+        ],
+        "category": "Tools",
+        "description": "Use a retriever as allowed tool for agent",
+        "inputParams": [
+          {
+            "label": "Retriever Name",
+            "name": "name",
+            "type": "string",
+            "placeholder": "search_state_of_union",
+            "id": "retrieverTool_0-input-name-string",
+            "display": true
+          },
+          {
+            "label": "Retriever Description",
+            "name": "description",
+            "type": "string",
+            "description": "When should agent uses to retrieve documents",
+            "rows": 3,
+            "placeholder": "Searches and returns documents regarding the state-of-the-union.",
+            "id": "retrieverTool_0-input-description-string",
+            "display": true
+          },
+          {
+            "label": "Return Source Documents",
+            "name": "returnSourceDocuments",
+            "type": "boolean",
+            "optional": true,
+            "id": "retrieverTool_0-input-returnSourceDocuments-boolean",
+            "display": true
+          },
+          {
+            "label": "Additional Metadata Filter",
+            "name": "retrieverToolMetadataFilter",
+            "type": "json",
+            "description": "Add additional metadata filter on top of the existing filter from vector store",
+            "optional": true,
+            "additionalParams": true,
+            "hint": {
+              "label": "What can you filter?",
+              "value": "Add additional filters to vector store. You can also filter with flow config, including the current \"state\":\n- `$flow.sessionId`\n- `$flow.chatId`\n- `$flow.chatflowId`\n- `$flow.input`\n- `$flow.state`\n"
+            },
+            "acceptVariable": true,
+            "id": "retrieverTool_0-input-retrieverToolMetadataFilter-json",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Retriever",
+            "name": "retriever",
+            "type": "BaseRetriever",
+            "id": "retrieverTool_0-input-retriever-BaseRetriever",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "name": "policy_checker",
+          "description": "This tool retrieves procurement policy rules, thresholds, and governance clauses from the source policy PDF.\n\nUse this tool for:\n- Disruption response levels and activation criteria (Level 1, 2, 3)\n- Supplier Watch List (SWL) criteria, compliance score thresholds, and new PO restrictions\n- Volume Rebate Program eligibility criteria and qualification conditions\n- Regional concentration limits and breach consequences\n- Defect rate thresholds by tier (Tier-1, Tier-2, Tier-3)\n- Escalation procedures and timelines\n- Alternate supplier activation requirements\n- Any policy rule, threshold, percentage cap, or program condition\n\nSearch queries to use for each topic:\n- Disruption response: query \"disruption response level High Risk Tier-3 activation\"\n- Watch List restrictions: query \"Supplier Watch List SWL compliance score new PO restriction\"\n- Volume Rebate: query \"Volume Rebate Program eligibility criteria qualification\"\n- Regional concentration: query \"regional concentration limit spend cap percentage breach\"\n- Defect rate thresholds: query \"defect rate Tier-2 Tier-3 threshold limit\"\n\nInstructions:\n- Treat retrieved text as the ONLY source of truth for policy rules.\n- Return the EXACT threshold, percentage, timeline, or condition from the retrieved text.\n- Do NOT paraphrase vaguely. Give the specific number (e.g. '20% of prior-quarter volume', '45% cap', 'score below 60', '2.50 defect rate', 'Level 3 Activate').\n- If a rule is not found in retrieved text, say: 'I could not confirm that rule from the retrieved policy text.'\n- Do NOT infer or assume policy language not present in the retrieved chunks.\n- Quote or summarize the retrieved rule faithfully without adding new conditions.\n- Always return the policy rule BEFORE the SQL query is interpreted, so the correct filter can be applied.",
+          "retriever": "{{documentStoreVS_0.data.instance}}",
+          "returnSourceDocuments": "",
+          "retrieverToolMetadataFilter": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "retrieverTool_0-output-retrieverTool-RetrieverTool|DynamicTool|Tool|StructuredTool|Runnable",
+            "name": "retrieverTool",
+            "label": "RetrieverTool",
+            "description": "Use a retriever as allowed tool for agent",
+            "type": "RetrieverTool | DynamicTool | Tool | StructuredTool | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 662,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 489.59342640650414,
+        "y": 394.2615802716284
+      },
+      "dragging": false
+    },
+    {
+      "id": "bufferMemory_0",
+      "position": {
+        "x": -215.17731609485568,
+        "y": 363.5725099097424
+      },
+      "type": "customNode",
+      "data": {
+        "id": "bufferMemory_0",
+        "label": "Buffer Memory",
+        "version": 2,
+        "name": "bufferMemory",
+        "type": "BufferMemory",
+        "baseClasses": [
+          "BufferMemory",
+          "BaseChatMemory",
+          "BaseMemory"
+        ],
+        "category": "Memory",
+        "description": "Retrieve chat messages stored in database",
+        "inputParams": [
+          {
+            "label": "Session Id",
+            "name": "sessionId",
+            "type": "string",
+            "description": "If not specified, a random id will be used. Learn <a target=\"_blank\" href=\"https://docs.flowiseai.com/memory#ui-and-embedded-chat\">more</a>",
+            "default": "",
+            "additionalParams": true,
+            "optional": true,
+            "id": "bufferMemory_0-input-sessionId-string",
+            "display": true
+          },
+          {
+            "label": "Memory Key",
+            "name": "memoryKey",
+            "type": "string",
+            "default": "chat_history",
+            "additionalParams": true,
+            "id": "bufferMemory_0-input-memoryKey-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "sessionId": "",
+          "memoryKey": "chat_history"
+        },
+        "outputAnchors": [
+          {
+            "id": "bufferMemory_0-output-bufferMemory-BufferMemory|BaseChatMemory|BaseMemory",
+            "name": "bufferMemory",
+            "label": "BufferMemory",
+            "description": "Retrieve chat messages stored in database",
+            "type": "BufferMemory | BaseChatMemory | BaseMemory"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 259,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -215.17731609485568,
+        "y": 363.5725099097424
+      },
+      "dragging": false
+    },
+    {
+      "id": "toolAgent_0",
+      "position": {
+        "x": 738.5830775852165,
+        "y": 908.6798477948618
+      },
+      "type": "customNode",
+      "data": {
+        "id": "toolAgent_0",
+        "label": "Tool Agent",
+        "version": 2,
+        "name": "toolAgent",
+        "type": "AgentExecutor",
+        "baseClasses": [
+          "AgentExecutor",
+          "BaseChain",
+          "Runnable"
+        ],
+        "category": "Agents",
+        "description": "Agent that uses Function Calling to pick the tools and args to call",
+        "inputParams": [
+          {
+            "label": "System Message",
+            "name": "systemMessage",
+            "type": "string",
+            "default": "You are a helpful AI assistant.",
+            "description": "If Chat Prompt Template is provided, this will be ignored",
+            "rows": 4,
+            "optional": true,
+            "additionalParams": true,
+            "id": "toolAgent_0-input-systemMessage-string",
+            "display": true
+          },
+          {
+            "label": "Max Iterations",
+            "name": "maxIterations",
+            "type": "number",
+            "optional": true,
+            "additionalParams": true,
+            "id": "toolAgent_0-input-maxIterations-number",
+            "display": true
+          },
+          {
+            "label": "Enable Detailed Streaming",
+            "name": "enableDetailedStreaming",
+            "type": "boolean",
+            "default": false,
+            "description": "Stream detailed intermediate steps during agent execution",
+            "optional": true,
+            "additionalParams": true,
+            "id": "toolAgent_0-input-enableDetailedStreaming-boolean",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Tools",
+            "name": "tools",
+            "type": "Tool",
+            "list": true,
+            "id": "toolAgent_0-input-tools-Tool",
+            "display": true
+          },
+          {
+            "label": "Memory",
+            "name": "memory",
+            "type": "BaseChatMemory",
+            "id": "toolAgent_0-input-memory-BaseChatMemory",
+            "display": true
+          },
+          {
+            "label": "Tool Calling Chat Model",
+            "name": "model",
+            "type": "BaseChatModel",
+            "description": "Only compatible with models that are capable of function calling: ChatOpenAI, ChatMistral, ChatAnthropic, ChatGoogleGenerativeAI, ChatVertexAI, GroqChat",
+            "id": "toolAgent_0-input-model-BaseChatModel",
+            "display": true
+          },
+          {
+            "label": "Chat Prompt Template",
+            "name": "chatPromptTemplate",
+            "type": "ChatPromptTemplate",
+            "description": "Override existing prompt with Chat Prompt Template. Human Message must includes {input} variable",
+            "optional": true,
+            "id": "toolAgent_0-input-chatPromptTemplate-ChatPromptTemplate",
+            "display": true
+          },
+          {
+            "label": "Input Moderation",
+            "description": "Detect text that could generate harmful output and prevent it from being sent to the language model",
+            "name": "inputModeration",
+            "type": "Moderation",
+            "optional": true,
+            "list": true,
+            "id": "toolAgent_0-input-inputModeration-Moderation",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "tools": [
+            "{{retrieverTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}",
+            "{{customTool_0.data.instance}}"
+          ],
+          "memory": "{{bufferMemory_0.data.instance}}",
+          "model": "{{groqChat_0.data.instance}}",
+          "chatPromptTemplate": "",
+          "systemMessage": "You are a supply-chain procurement assistant with two tools:\n1. supplier_performance_db — queries the supplier_performance SQL table for all structured data.\n2. policy_checker — retrieves procurement policy rules from the policy PDF.\n\nCRITICAL TOOL ROUTING RULES:\n- Questions about supplier names, counts, tiers, risk levels, regions, spend, PO values, defect rates, compliance scores, disruption flags, watch-list candidates, eligibility filters → ALWAYS use supplier_performance_db.\n- Questions about rules, thresholds, eligibility conditions, response levels, restrictions, caps, program criteria, escalation logic → ALWAYS use policy_checker.\n- Questions that combine data + policy (e.g. 'which suppliers qualify', 'does it breach', 'what response level', 'are they restricted') → use BOTH tools before answering.\n- NEVER answer from your own knowledge. Every fact, number, name, and rule MUST come from a tool result.\n- NEVER skip a tool call because you think you know the answer.\n- NEVER invent supplier names, counts, totals, percentages, or policy thresholds.\n\nSCHEMA (supplier_performance table - exact column names WITH underscores):\n- Supplier_ID, Supplier_Name, Region, Country\n- Product_Category, Product_SKU\n- Unit_Cost_USD, Lead_Time_Days\n- OTD_Rate_Pct (On-Time Delivery %)\n- Defect_Rate_Pct (defect rate per PO)\n- Compliance_Score (0-100; below 60 = Watch List)\n- Contract_Tier (stored as text: 'Tier-1', 'Tier-2', or 'Tier-3')\n- Payment_Terms_Days, MOQ_Units, Annual_Volume_Units\n- Risk_Level ('High', 'Medium', 'Low')\n- Active_Disruptions (text: disruption description string, e.g. 'Currency volatility flag'; NULL when no disruption; filter with IS NOT NULL)\n- PO_Value_USD (PO value in USD)\n- POID, PO_Quarter, Units_Ordered, Units_Delivered_On_Time, Units_Rejected\n- Sustainability_Score, Certifications, Last_Audit_Date, Alt_Supplier_ID\n\nKEY POLICY RULES (use policy_checker to confirm exact wording):\n- SWL (Supplier Watch List): triggered when Compliance_Score < 60; new PO issuance restricted to 20% of prior-quarter volume.\n- Tier-2 defect ceiling: 2.50 average defect rate.\n- Regional concentration cap: 45% of total annual procurement spend; breach requires Diversification Plan within 60 days.\n- High Risk + disruption flag = Level 3 Activate: CPO escalation + alternate supplier activation for 40% or more of volume within 10 business days.\n- Volume Rebate Program: use policy_checker to retrieve exact eligibility criteria.\n\nFOR EVERY QUESTION:\nStep 1 - Classify: does this need SQL only, policy only, or both?\nStep 2 - Call the required tool(s). For combined questions, call BOTH tools.\nStep 3 - Read tool outputs carefully.\nStep 4 - If SQL returns no rows, say so and do not fabricate.\nStep 5 - Compose the answer ONLY from tool outputs.\n\nWhen writing your answer:\n- Always include the actual count number from the SQL result.\n- Always include the actual supplier names returned by the SQL tool.\n- Always include the specific policy rule text retrieved by policy_checker.\n- State clearly whether a threshold is breached or not, and why.\n- Do not use placeholder text. Fill in real values from the tool results.\n- Do not write narrative prose. Give a structured, concise answer.\n- Do not say 'based on my knowledge' or 'it seems'.\n\nAnswer in this structure:\nAnswer:\n- Count: [number from SQL result]\n- Suppliers: [names from SQL result]\n- Policy Rule: [text from policy_checker]\n- Conclusion: [statement based on the above two]\n\nWhen a user asks a question, immediately call the required tool(s) without asking clarifying questions.\n\nSQL WRITING RULES (CRITICAL):\n- Write SQL using plain column names without any quoting. The tool automatically handles quoting. Example: SELECT Supplier_Name FROM supplier_performance WHERE Contract_Tier = 'Tier-3'\n- To get unique suppliers, ALWAYS use SELECT DISTINCT Supplier_Name — never rely on row-level results to count unique suppliers.\n- To count unique suppliers AND get names in one call: SELECT DISTINCT Supplier_Name, Risk_Level FROM supplier_performance WHERE Contract_Tier = 'Tier-3' AND Active_Disruptions IS NOT NULL ORDER BY Supplier_Name\n- NEVER add LIMIT to your queries. The tool must return ALL matching rows.\n- Call supplier_performance_db EXACTLY ONCE per question. Do not make separate COUNT and SELECT calls.\n- The count of results = the number of rows returned by the SQL. Count the rows yourself from the tool output; do NOT run a separate COUNT(*) query.\n- If the tool returns 24 rows, the count is 24. Report all supplier names returned.",
+          "inputModeration": "",
+          "maxIterations": "",
+          "enableDetailedStreaming": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "toolAgent_0-output-toolAgent-AgentExecutor|BaseChain|Runnable",
+            "name": "toolAgent",
+            "label": "AgentExecutor",
+            "description": "Agent that uses Function Calling to pick the tools and args to call",
+            "type": "AgentExecutor | BaseChain | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 492,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 738.5830775852165,
+        "y": 908.6798477948618
+      },
+      "dragging": false
+    },
+    {
+      "id": "customTool_0",
+      "position": {
+        "x": 444.32850737391084,
+        "y": 679.6969234619467
+      },
+      "type": "customNode",
+      "data": {
+        "id": "customTool_0",
+        "label": "Custom Tool",
+        "version": 3,
+        "name": "customTool",
+        "type": "CustomTool",
+        "baseClasses": [
+          "CustomTool",
+          "Tool",
+          "StructuredTool",
+          "Runnable"
+        ],
+        "category": "Tools",
+        "description": "Use custom tool you've created in Flowise within chatflow",
+        "inputParams": [
+          {
+            "label": "Select Tool",
+            "name": "selectedTool",
+            "type": "asyncOptions",
+            "loadMethod": "listTools",
+            "id": "customTool_0-input-selectedTool-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Return Direct",
+            "name": "returnDirect",
+            "description": "Return the output of the tool directly to the user",
+            "type": "boolean",
+            "optional": true,
+            "id": "customTool_0-input-returnDirect-boolean",
+            "display": true
+          },
+          {
+            "label": "Custom Tool Name",
+            "name": "customToolName",
+            "type": "string",
+            "hidden": true,
+            "id": "customTool_0-input-customToolName-string",
+            "display": true
+          },
+          {
+            "label": "Custom Tool Description",
+            "name": "customToolDesc",
+            "type": "string",
+            "hidden": true,
+            "id": "customTool_0-input-customToolDesc-string",
+            "display": true
+          },
+          {
+            "label": "Custom Tool Schema",
+            "name": "customToolSchema",
+            "type": "string",
+            "hidden": true,
+            "id": "customTool_0-input-customToolSchema-string",
+            "display": true
+          },
+          {
+            "label": "Custom Tool Func",
+            "name": "customToolFunc",
+            "type": "string",
+            "hidden": true,
+            "id": "customTool_0-input-customToolFunc-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "selectedTool": "f94e53eb-dc7d-46a4-a759-0383788761cf",
+          "returnDirect": "",
+          "customToolName": "",
+          "customToolDesc": "",
+          "customToolSchema": "",
+          "customToolFunc": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "customTool_0-output-customTool-CustomTool|Tool|StructuredTool|Runnable",
+            "name": "customTool",
+            "label": "CustomTool",
+            "description": "Use custom tool you've created in Flowise within chatflow",
+            "type": "CustomTool | Tool | StructuredTool | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 378,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": 444.32850737391084,
+        "y": 679.6969234619467
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "documentStoreVS_0",
+      "sourceHandle": "documentStoreVS_0-output-retriever-BaseRetriever",
+      "target": "retrieverTool_0",
+      "targetHandle": "retrieverTool_0-input-retriever-BaseRetriever",
+      "type": "buttonedge",
+      "id": "documentStoreVS_0-documentStoreVS_0-output-retriever-BaseRetriever-retrieverTool_0-retrieverTool_0-input-retriever-BaseRetriever"
+    },
+    {
+      "source": "groqChat_0",
+      "sourceHandle": "groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "toolAgent_0",
+      "targetHandle": "toolAgent_0-input-model-BaseChatModel",
+      "type": "buttonedge",
+      "id": "groqChat_0-groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable-toolAgent_0-toolAgent_0-input-model-BaseChatModel"
+    },
+    {
+      "source": "bufferMemory_0",
+      "sourceHandle": "bufferMemory_0-output-bufferMemory-BufferMemory|BaseChatMemory|BaseMemory",
+      "target": "toolAgent_0",
+      "targetHandle": "toolAgent_0-input-memory-BaseChatMemory",
+      "type": "buttonedge",
+      "id": "bufferMemory_0-bufferMemory_0-output-bufferMemory-BufferMemory|BaseChatMemory|BaseMemory-toolAgent_0-toolAgent_0-input-memory-BaseChatMemory"
+    },
+    {
+      "source": "retrieverTool_0",
+      "sourceHandle": "retrieverTool_0-output-retrieverTool-RetrieverTool|DynamicTool|Tool|StructuredTool|Runnable",
+      "target": "toolAgent_0",
+      "targetHandle": "toolAgent_0-input-tools-Tool",
+      "type": "buttonedge",
+      "id": "retrieverTool_0-retrieverTool_0-output-retrieverTool-RetrieverTool|DynamicTool|Tool|StructuredTool|Runnable-toolAgent_0-toolAgent_0-input-tools-Tool"
+    },
+    {
+      "source": "customTool_0",
+      "sourceHandle": "customTool_0-output-customTool-CustomTool|Tool|StructuredTool|Runnable",
+      "target": "toolAgent_0",
+      "targetHandle": "toolAgent_0-input-tools-Tool",
+      "type": "buttonedge",
+      "id": "customTool_0-customTool_0-output-customTool-CustomTool|Tool|StructuredTool|Runnable-toolAgent_0-toolAgent_0-input-tools-Tool"
+    }
+  ]
+}
